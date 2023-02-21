@@ -149,7 +149,7 @@ def retrieve_object(object_hash):
     object_dir = object_hash[:2]
     object_file_name = object_hash[2:]
     print_info(
-        "Downloading object to: " + GIT_DIR + "objects/" + object_dir + "/" + object_file_name)
+        "Downloading object from: " + url + "objects/" + object_dir + "/" + object_file_name)
     if not os.path.exists(GIT_DIR + GIT_OBJECTS_DIR + object_dir):
         os.mkdir(GIT_DIR + GIT_OBJECTS_DIR + object_dir)
     object_file_response = requests.get(url + GIT_OBJECTS_DIR + object_dir + "/" + object_file_name)
@@ -159,7 +159,7 @@ def retrieve_object(object_hash):
             object_file_handle = open(GIT_DIR + GIT_OBJECTS_DIR + object_dir + "/" + object_file_name, "xb")
             object_file_handle.write(object_file)
             print_success(
-                "Wrote object " + object_hash + "to " + GIT_DIR + GIT_OBJECTS_DIR + object_dir + object_file_name)
+                "Wrote object " + object_hash + " to " + GIT_DIR + GIT_OBJECTS_DIR + object_dir + "/" + object_file_name)
         except IOError as e:
             print_error("Failed to write object to git objects: ", e)
             failedFiles.append(object_hash)
